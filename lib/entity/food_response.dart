@@ -1,17 +1,17 @@
 import 'package:deliveryfood/entity/entity.dart';
 
 class FoodResponse {
-  List<Foods> yemekler; //foods list
+  List<Foods> foods; //foods list
   int success;
 
-  FoodResponse({required this.yemekler, required this.success});
+  FoodResponse({required this.foods, required this.success});
 
   factory FoodResponse.fromJson(Map<String, dynamic> json) {
-    var jsonArray = json["yemekler"] as List;
-    List<Foods> yemeklerListesi = jsonArray
+    var jsonArray = json["foods"] as List;
+    List<Foods> foodsListesi = jsonArray
         .map((jsonArrayObject) => Foods.fromJson(jsonArrayObject))
         .toList();
     int success = json["success"] as int;
-    return FoodResponse(yemekler: yemeklerListesi, success: success);
+    return FoodResponse(foods: foodsListesi, success: success);
   }
 }

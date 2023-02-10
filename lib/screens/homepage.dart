@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FoodsPage extends StatefulWidget {
 
-  late Foods yemek;
+  late Foods food;
 
 
   @override
@@ -38,7 +38,7 @@ void initState() {
   context.read<BasketPageCubit>().loadFoodInCart("${FirebaseAuth.instance.currentUser?.email}");
 }
 
-  int yemek_siparis_adet = 1;
+  int food_order_piece = 1;
   var count = 0;
   @override
   Widget build(BuildContext context) {
@@ -46,23 +46,23 @@ void initState() {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         title: Text(
-          "Yemekler",
+          "Food",
           style: TextStyle(fontWeight: FontWeight.bold,fontFamily: "Montserrat-Medium.ttf", color: kTextColorWhite,fontSize: 20),
         ),
         centerTitle: true,
       ),
       body: BlocBuilder<HomePageCubit,List<Foods>>(
-          builder: (context,yemeklerListesi){
-            if(yemeklerListesi.isNotEmpty){
+          builder: (context,FoodList){
+            if(FoodList.isNotEmpty){
               return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, childAspectRatio: 2 / 3),
-                  itemCount: yemeklerListesi.length,
+                  itemCount: FoodList.length,
                   itemBuilder: (context,index){
-                    var yemek = yemeklerListesi[index];
+                    var food = FoodList[index];
                     return GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FoodDetailPage(yemek: yemek)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FoodDetailPage(food: food)));
                       },
                       child: Container(
                         margin: EdgeInsets.all(10),
@@ -92,17 +92,17 @@ void initState() {
                                 ],
                               ),
                               CircleAvatar(backgroundImage: NetworkImage(
-                                  "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}"),maxRadius: 60,backgroundColor: kPrimaryColor,),
+                                  "http://kasimadalan.pe.hu/Food/resimler/${food.food_image_name}"),maxRadius: 60,backgroundColor: kPrimaryColor,),
                               SizedBox(height:5),
                               Text(
-                                yemek.yemek_adi,
+                                food.food_id,
                                 style: TextStyle(color: kTextColorWhite,fontSize: 18,fontWeight: FontWeight.bold),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
 
-                                  //GİZLENDİ AddToCart butonu
+                                  //HIDDEN AddToCart button
                                   // Padding(
                                   //   padding: const EdgeInsets.all(10.0),
                                   //   child: IconButton(
@@ -110,26 +110,26 @@ void initState() {
                                   //     onPressed: () {
                                   //
                                   //
-                                  //       for (var i = 0; i < yemeklerListesi.length; i++) {
-                                  //         if (widget.yemek.yemek_adi == yemeklerListesi[i].yemek_adi) {
+                                  //       for (var i = 0; i < FoodList.length; i++) {
+                                  //         if (widget.food.food_adi == FoodList[i].food_name) {
                                   //           count = 0;
                                   //           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   //             duration: Duration(seconds: 1),
-                                  //             content: Text("Bu Ürün Sepete Eklendi"),
+                                  //             content: Text("This Product Has Been Added To Cart"),
                                   //           ));
                                   //           return;
                                   //         }
                                   //       }
                                   //       if (count == 0) {
-                                  //         context.read<FoodDetailPageCubit>().AddFood(widget.yemek.yemek_adi, widget.yemek.yemek_resim_adi,
-                                  //             int.parse(widget.yemek.yemek_fiyat), yemek_siparis_adet, "${FirebaseAuth.instance.currentUser?.email}");
+                                  //         context.read<FoodDetailPageCubit>().AddFood(widget.food.food_name, widget.food.food_image_name,
+                                  //             int.parse(widget.food.food_price), food_order_piece, "${FirebaseAuth.instance.currentUser?.email}");
                                   //         count--;
                                   //
                                   //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   //           duration: Duration(seconds: 2),
-                                  //           content: Text("Ürün Başarıyla Eklendi, Sepete Gitmek İster Misiniz ?"),
+                                  //           content: Text("Product Added Successfully, Would You Like To Go To Cart?"),
                                   //           action: SnackBarAction(
-                                  //             label: "Evet",
+                                  //             label: "Yes",
                                   //             onPressed: () {
                                   //               Navigator.push(context, MaterialPageRoute(builder: ((context) => BasketPage())));
                                   //             },
@@ -137,14 +137,14 @@ void initState() {
                                   //         ));
                                   //       } else {
                                   //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  //           content: Text("Bu Ürün Zaten Sepette !"),
+                                  //           content: Text("This Product Is Already In The Cart!"),
                                   //         ));
                                   //       }
                                   //
                                   //     }, icon: Icon(Icons.add_circle,color: kPrimaryColor,),
                                   //   ),
                                   // ),
-                                  Text("${yemek.yemek_fiyat}.00 ₺",style: TextStyle(color: kTextColorWhite,fontFamily: "Roboto-Regular.ttf",fontSize: 18),)
+                                  Text("${food.food_price}.00 ₹",style: TextStyle(color: kTextColorWhite,fontFamily: "Roboto-Regular.ttf",fontSize: 18),)
                                 ],
                               )
                             ],

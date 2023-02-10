@@ -44,7 +44,7 @@ class _BasketPageState extends State<BasketPage> {
             onPressed: () {
               Navigator.pop(context);
             }),
-        title: const Text("SEPETİM",
+        title: const Text("MY BASKET",
           style: TextStyle(fontFamily: "Montserrat-Bold.ttf",fontSize: 20,fontWeight: FontWeight.bold,),
         ),
         centerTitle: true,
@@ -54,8 +54,8 @@ class _BasketPageState extends State<BasketPage> {
           builder: (context, foodList) {
             cartSummary = 0;
             for (var i = 0; i < foodList.length; i++) {
-              cartSummary += int.parse(foodList[i].yemek_fiyat) *
-                  int.parse(foodList[i].yemek_siparis_adet);
+              cartSummary += int.parse(foodList[i].food_price) *
+                  int.parse(foodList[i].food_order_piece);
             }
             if (foodList.isNotEmpty) {
               return Column(
@@ -79,7 +79,7 @@ class _BasketPageState extends State<BasketPage> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Image.network(
-                                  "http://kasimadalan.pe.hu/yemekler/resimler/${food.yemek_resim_adi}",
+                                  "http://kasimadalan.pe.hu/yemekler/resimler/${food.food_image_name}",
                                   width: 80,
                                   height: 80,
                                 ),
@@ -96,7 +96,7 @@ class _BasketPageState extends State<BasketPage> {
                                   Row(mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "${food.yemek_siparis_adet} Adet ",
+                                        "${food.food_order_piece} Piece ",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: "Montserrat-Light.ttf",
@@ -104,7 +104,7 @@ class _BasketPageState extends State<BasketPage> {
                                             color: kTextColorDark),
                                       ),
                                       Text(
-                                        " ${food.yemek_adi}",
+                                        " ${food.food_name}",
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontFamily: "Montserrat-Light.ttf",
@@ -120,7 +120,7 @@ class _BasketPageState extends State<BasketPage> {
                                   Row(mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Toplam Fiyat: ",
+                                        "Total price:",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: "Montserrat-Light.ttf",
@@ -128,7 +128,7 @@ class _BasketPageState extends State<BasketPage> {
                                             color: kTextColorDark),
                                       ),
                                       Text(
-                                        "${int.parse(food.yemek_fiyat) * int.parse(food.yemek_siparis_adet)} ₺",
+                                        "${int.parse(food.food_price) * int.parse(food.food_order_piece)} ₹",
                                         style: TextStyle(
                                             fontSize: 18,
                                             fontFamily: "Montserrat-Light.ttf",
@@ -148,9 +148,9 @@ class _BasketPageState extends State<BasketPage> {
                                   ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackBar(
                                           content: Text(
-                                              "Bu ürünü silmek istediğinize emin misiniz?"),
+                                              "Are you sure you want to delete this product?"),
                                           action: SnackBarAction(
-                                            label: "Evet",
+                                            label: "Yeah",
                                             onPressed: () {
                                               setState(() {
                                                 print(foodList);
@@ -158,7 +158,7 @@ class _BasketPageState extends State<BasketPage> {
                                                     .read<BasketPageCubit>()
                                                     .removeFood(
                                                     int.parse(food
-                                                        .sepet_yemek_id),
+                                                        .basket_food_id),
                                                     "${FirebaseAuth.instance.currentUser?.email}");
                                               });
 
@@ -181,9 +181,9 @@ class _BasketPageState extends State<BasketPage> {
                                 //       ScaffoldMessenger.of(context)
                                 //           .showSnackBar(SnackBar(
                                 //         content: Text(
-                                //             "Bu ürünü silmek istediğinize emin misiniz?"),
+                                //             "Are you sure you want to delete this product?"),
                                 //         action: SnackBarAction(
-                                //           label: "Evet",
+                                //           label: "Yeah",
                                 //           onPressed: () {
                                 //             setState(() {
                                 //               print(foodList);
@@ -191,7 +191,7 @@ class _BasketPageState extends State<BasketPage> {
                                 //                   .read<BasketPageCubit>()
                                 //                   .removeFood(
                                 //                   int.parse(food
-                                //                       .sepet_yemek_id),
+                                //                       .basket_food_id),
                                 //                   "${FirebaseAuth.instance.currentUser?.email}");
                                 //             });
                                 //
@@ -205,7 +205,7 @@ class _BasketPageState extends State<BasketPage> {
                                 //         ),
                                 //       ));
                                 //     },
-                                //     child: Text("Sil")),
+                                //     child: Text("delete")),
                               ),
                             ],
                           ),
@@ -221,7 +221,7 @@ class _BasketPageState extends State<BasketPage> {
                       height: 50,
                       color: Colors.transparent,
                       child: Text(
-                        "Sepet Toplamı: ${cartSummary} ₺",
+                        "Cart Total: ${cartSummary} ₹",
                         style: TextStyle(
                             fontSize: 18,
                             fontFamily: "Roboto-Regular.ttf",
@@ -240,7 +240,7 @@ class _BasketPageState extends State<BasketPage> {
                         onPressed: () {
                           for (var i = 0; i < foodList.length; i++) {
                             context.read<BasketPageCubit>().removeFood(
-                                int.parse(foodList[i].sepet_yemek_id),
+                                int.parse(foodList[i].basket_food_id),
                                 "${FirebaseAuth.instance.currentUser?.email}");
                           }
                           setState(() {
@@ -255,12 +255,12 @@ class _BasketPageState extends State<BasketPage> {
                                     iconColor: kSecondaryColor,
                                     backgroundColor: kTextColorWhite,
                                     shape:Border.symmetric(),
-                                    title: Text("Sepet Onaylandı"),
+                                    title: Text("Cart Confirmed"),
                                     content:
-                                    Text("Sepet Toplamı: ${cartSummary} ₺"),
+                                    Text("Cart Total: ${cartSummary} ₹"),
                                     actions: [
                                       TextButton(
-                                          child: Text("Tamam"),
+                                          child: Text("ok"),
                                           onPressed: () {
                                             Navigator.of(context).popUntil(
                                                     (route) => route.isFirst);
@@ -269,7 +269,7 @@ class _BasketPageState extends State<BasketPage> {
                               });
                         },
                         child: Text(
-                          "Sepeti Onayla",
+                          "Confirm Cart",
                           style: TextStyle(fontSize: 20, color: kTextColorWhite),
                         )
                     ),
@@ -281,7 +281,7 @@ class _BasketPageState extends State<BasketPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Sepetiniz boş"),
+                    Text("Your cart is empty"),
                     Container(
                       height: 50,
                     ),
@@ -296,7 +296,7 @@ class _BasketPageState extends State<BasketPage> {
         appBar: AppBar(
           backgroundColor: kPrimaryColor,
           title: Text(
-            "SEPETİM",
+            "MY BASKET",
             style: TextStyle(color: kTextColorWhite, fontSize: 20,fontFamily: "Montserrat-Bold.ttf"),
           ),
           centerTitle: true,
@@ -331,7 +331,7 @@ class _BasketPageState extends State<BasketPage> {
                 Container(
                   width: double.infinity,
                   child: const Text(
-                    "Sepetiniz Boş",
+                    "Your Cart Is Empty",
                     style: TextStyle(
                       color: kTextColorDark,
                       fontFamily: 'Roboto-Regular.ttf',
@@ -347,7 +347,7 @@ class _BasketPageState extends State<BasketPage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: ((context) => FoodsPage())));
                   }, child: const Text(
-                    "Alışverişe devam etmek\niçin buraya tıklayın",
+                    "continue shopping\nClick here for",
                     style: TextStyle(
                       color: kTextColorDark,
                       fontFamily: 'Roboto-Regular.ttf',

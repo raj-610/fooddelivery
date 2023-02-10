@@ -7,16 +7,16 @@ class FoodDetailPageCubit extends Cubit<void> {
   var foodrepo = FoodsDaoRepository();
 
   Future<void> AddFood(
-      String yemek_adi,
-      String yemek_resim_adi,
-      int yemek_fiyat,
-      int yemek_siparis_adet,
-      String kullanici_adi) async {
+      String food_name,
+      String food_image_name,
+      int food_price,
+      int food_order_piece,
+      String username) async {
     await foodrepo.addToCart(
-        yemek_adi,
-        yemek_resim_adi,
-        yemek_fiyat,
-        yemek_siparis_adet,
-        kullanici_adi);
+        food_name,
+        food_image_name,
+        food_price,
+        food_order_piece,
+        username);
   }
 }

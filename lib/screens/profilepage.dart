@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:deliveryfood/constants/constants.dart';
-import 'package:deliveryfood/screens/screens.dart';
-import 'package:deliveryfood/services/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -36,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: kPrimaryColor,
                       image: DecorationImage(
                           image: NetworkImage(
-                              '${this.widget.detailsUser.photoUrl}'),
+                              'https://www.instagram.com/p/CQBMBXRBNve/'),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.all(Radius.circular(75.0)),
                       boxShadow: [
@@ -48,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 SizedBox(height: 15.0),
                 Text(
-                  '${this.widget.detailsUser.userName}',
+                  '${this.widget.detailsUser.username}',
                   style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.w800,

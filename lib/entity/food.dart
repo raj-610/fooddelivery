@@ -1,22 +1,22 @@
 class Foods {
-  String yemek_id;//food_id
-  String yemek_adi;//food_name
-  String yemek_resim_adi;//food_img_name
-  String yemek_fiyat;//food_price
+  String food_id;//food_id
+  String food_name;//food_name
+  String food_image_name;//food_img_name
+  String food_price;//food_price
 
 
   Foods({
-    required this.yemek_id,
-    required this.yemek_adi,
-    required this.yemek_resim_adi,
-    required this.yemek_fiyat
+    required this.food_id,
+    required this.food_name,
+    required this.food_image_name,
+    required this.food_price
   });
 
   factory Foods.fromJson(Map<String, dynamic> json) {
     return Foods(
-        yemek_id: json["yemek_id"] as String,
-        yemek_adi: json["yemek_adi"] as String,
-        yemek_resim_adi: json["yemek_resim_adi"] as String,
-        yemek_fiyat: json["yemek_fiyat"] as String);
+        food_id: json["food_id"] as String,
+        food_name: json["food_name"] as String,
+        food_image_name: json["food_image_name"] as String,
+        food_price: json["food_price"] as String);
   }
 }

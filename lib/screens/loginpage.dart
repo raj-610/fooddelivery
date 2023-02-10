@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
             Icons.vpn_key,
             color: Colors.white,
           ),
-          hintText: 'Parola',
+          hintText: 'Password',
           prefixText: ' ',
           hintStyle: TextStyle(
             color: Colors.white,
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
         _buildLoginButton(),
         _buildSpace(size),
         _buildLoginWithOtherButton(
-            'Google ile giriş', FontAwesomeIcons.google, Colors.red, _loginWithGoogleButtonFunction),
+            'Login with Google', FontAwesomeIcons.google, Colors.red, _loginWithGoogleButtonFunction),
         _buildSpace(size),
 
       ],
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildLoginButtonText() {
     return Text(
-      "Giriş yap",
+      "Login",
       style: TextStyle(
         color: Colors.white,
         fontSize: 20,
@@ -171,13 +171,13 @@ class _LoginPageState extends State<LoginPage> {
       return Navigator.push(context, MaterialPageRoute(builder: (context) => FoodsPage()));
     }).catchError((dynamic error) {
       if (error.code.contains('invalid-email')) {
-        _buildErrorMessage("Mail adresi geçersizdir");
+        _buildErrorMessage("Email address is invalid");
       }
       if (error.code.contains('user-not-found')) {
-        _buildErrorMessage("Kullanıcı bulunamadı");
+        _buildErrorMessage("incorrectUser not found");
       }
       if (error.code.contains('wrong-password')) {
-        _buildErrorMessage("Parola yanlıştır");
+        _buildErrorMessage("Password is wrong");
       }
 
       //  _buildErrorMessage(error.message);
@@ -272,7 +272,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildRegisterText() {
     return Text(
-      "Kayıt ol",
+      "Register",
       style: TextStyle(color: Colors.white),
     );
   }

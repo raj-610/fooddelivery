@@ -55,7 +55,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Icons.person,
                                   color: Colors.white,
                                 ),
-                                hintText: 'Kullanıcı adı',
+                                hintText: 'Username',
                                 prefixText: ' ',
                                 hintStyle: TextStyle(color: Colors.white),
                                 focusColor: Colors.white,
@@ -111,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Icons.vpn_key,
                                   color: Colors.white,
                                 ),
-                                hintText: 'Parola',
+                                hintText: 'Password',
                                 prefixText: ' ',
                                 hintStyle: TextStyle(color: Colors.white),
                                 focusColor: Colors.white,
@@ -139,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Icons.vpn_key,
                                   color: Colors.white,
                                 ),
-                                hintText: 'Parola Tekrar',
+                                hintText: 'Confirm Password',
                                 prefixText: ' ',
                                 hintStyle: TextStyle(color: Colors.white),
                                 focusColor: Colors.white,
@@ -180,7 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 padding: const EdgeInsets.all(5.0),
                                 child: Center(
                                     child: Text(
-                                      "Kaydet",
+                                      "Register",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
@@ -215,7 +215,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       width: size.width * 0.3,
                     ),
                     Text(
-                      "Kayıt ol",
+                      "Register",
                       style: TextStyle(
                           fontSize: 20,
                           color: kTextColorDark,

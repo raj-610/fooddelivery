@@ -85,10 +85,17 @@ class _WelcomePageState extends State<WelcomePage>
               children: [
                 TextButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterPage()));
-                }, child: Text("Üye Ol",style: TextStyle(color: kTextColorWhite),)),
+                }, child: Text("Sign up",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                ),),
+                SizedBox(
+                  width: 80,
+                ),
                 TextButton(onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
-                }, child: Text("Giriş Yap",style: TextStyle(color: kTextColorWhite),)),
+                }, child: Text("login",style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                ),),
               ],
             ),
           ],
